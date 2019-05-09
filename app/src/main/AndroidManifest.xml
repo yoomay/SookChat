@@ -19,6 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_KEY"></meta-data>
         <activity
             android:name=".WatsonActivity"
             android:label="@string/title_activity_main2"

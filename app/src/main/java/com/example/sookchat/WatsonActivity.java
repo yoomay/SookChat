@@ -98,8 +98,8 @@ public class WatsonActivity extends AppCompatActivity {
         inputMessage = findViewById(R.id.message);
         btnSend = findViewById(R.id.btn_send);
         btnRecord = findViewById(R.id.btn_record);
-        String customFont = "Montserrat-Regular.ttf";
-        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
+        String customFont = "NotoSerif-Regular.ttf";
+       Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
         inputMessage.setTypeface(typeface);
         recyclerView = findViewById(R.id.recycler_view);
 

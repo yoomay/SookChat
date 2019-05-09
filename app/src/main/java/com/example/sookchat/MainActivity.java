@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-
 public class MainActivity extends AppCompatActivity {
 
     // FrameLayout에 각 메뉴의 Fragment를 바꿔 줌
@@ -54,7 +53,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }
