@@ -18,9 +18,20 @@ public class ChatbotFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_chatbot,container,false);
+        Button btn0=(Button) v.findViewById(R.id.btn_main);
         Button btn1=(Button) v.findViewById(R.id.btn_1);
         Button btn2=(Button) v.findViewById(R.id.btn_2);
         Button btn3=(Button) v.findViewById(R.id.btn_3);
+
+        btn0.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                    Intent intent0 = new Intent(getActivity(),WatsonActivity.class);
+                    startActivity(intent0);
+            }
+
+        });
 
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override

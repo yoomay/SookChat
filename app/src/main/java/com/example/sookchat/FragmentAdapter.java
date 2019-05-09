@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
+//it is for CardClickActivity Image Slider
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     // ViewPager에 들어갈 Fragment들을 담을 리스트

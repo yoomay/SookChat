@@ -16,8 +16,8 @@ import java.util.List;
 
 public class AgoraFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private MyRecyclerAdapter mAdapter;
+    private RecyclerView recycler_view;
+    private MyRecyclerAdapter myAdapter;
     private ArrayList<Data> dataList = new ArrayList<>();
 
     @Override
@@ -27,14 +27,14 @@ public class AgoraFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_agora,container,false);
 
         //recycler View
-        recyclerView=(RecyclerView)view.findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        mAdapter = new MyRecyclerAdapter(getActivity(),dataList);
+        recycler_view=(RecyclerView)view.findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(true);
+        myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
 
         RecyclerView.LayoutManager mLayoutManager=new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        recycler_view.setLayoutManager(mLayoutManager);
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.setAdapter(myAdapter);
 
         return view;
 

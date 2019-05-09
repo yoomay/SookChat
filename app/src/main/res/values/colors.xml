@@ -3,4 +3,6 @@
     <color name="colorPrimary">#1DA1F2</color>
     <color name="colorPrimaryDark">#1DA1F2</color>
     <color name="colorAccent">#1DA1F2</color>
+    <color name="bg_bubble_self">#304EEE</color>
+    <color name="bg_bubble_watbot">#ecf0f1</color>
 </resources>
