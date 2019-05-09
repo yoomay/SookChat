@@ -91,15 +91,15 @@ public class WatsonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_watson);
 
         mContext = getApplicationContext();
 
         inputMessage = findViewById(R.id.message);
         btnSend = findViewById(R.id.btn_send);
         btnRecord = findViewById(R.id.btn_record);
-        String customFont = "Montserrat-Regular.ttf";
-        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
+        String customFont = "NotoSerif-Regular.ttf";
+       Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
         inputMessage.setTypeface(typeface);
         recyclerView = findViewById(R.id.recycler_view);
 
