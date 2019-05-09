@@ -34,7 +34,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         rootView = inflater.inflate(R.layout.fragment_map, container, false);
         //In fragment, by Mapview, we will excute a map
 
-        mapView = (MapView) rootView.findViewById(R.id.map);
+        mapView = (MapView) rootView.findViewById(R.id.Map);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
         mapView.getMapAsync(this);//비동기적 방식으로 구글 맵 실행
