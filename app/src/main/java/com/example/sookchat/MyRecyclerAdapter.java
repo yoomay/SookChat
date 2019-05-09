@@ -48,8 +48,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         return new ViewHolder(view);
     }
 
-    //클릭이벤트 리스너
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

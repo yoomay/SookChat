@@ -2,17 +2,13 @@ package com.example.sookchat;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-
 
 public class MainActivity extends AppCompatActivity {
-
 
     // FrameLayout에 각 메뉴의 Fragment를 바꿔 줌
     private FragmentManager fragmentManager = getSupportFragmentManager();
@@ -56,8 +52,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
-
-
 }
