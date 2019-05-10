@@ -9,15 +9,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 
+import java.net.URL;
+
+
 public class ChatbotFragment extends Fragment {
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+
+
+
+
         //Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_chatbot,container,false);
+
         Button btn0=(Button) v.findViewById(R.id.btn_main);
         Button btn1=(Button) v.findViewById(R.id.btn_1);
         Button btn2=(Button) v.findViewById(R.id.btn_2);
@@ -46,17 +59,21 @@ public class ChatbotFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Uri uri = Uri.parse("http://www.lib.sookmyung.ac.kr");
+
+                Uri uri = Uri.parse("http://lib.sookmyung.ac.kr/");
                 Intent intent2 = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent2);
+
             }
 
         });
 
+
+
         btn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Uri uri = Uri.parse("http://www.snowe.sookmyung.ac.kr");
+                Uri uri = Uri.parse("http://snowe.sookmyung.ac.kr/");
                 Intent intent3 = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent3);
             }
