@@ -58,10 +58,4 @@ public class AgoraFragment extends Fragment {
     }
 
 
-    /**@Override
-    public void onItemClicked(int position) {
-        Intent i = new Intent(getActivity(),CardClickActivity.class);
-        startActivity(i);
-
-    }**/
 }

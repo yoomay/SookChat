@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import android.support.v7.widget.Toolbar;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream;
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
@@ -68,6 +69,7 @@ public class WatsonActivity extends AppCompatActivity {
     private SessionResponse watsonAssistantSession;
     private SpeechToText speechService;
     private TextToSpeech textToSpeech;
+    private Toolbar mToolbar;
 
     private void createServices() {
         watsonAssistant = new Assistant("2018-11-08", new IamOptions.Builder()
@@ -161,6 +163,11 @@ public class WatsonActivity extends AppCompatActivity {
 
         createServices();
         sendMessage();
+
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("SookBOT");
+        setSupportActionBar(mToolbar);
     }
 
     ;
