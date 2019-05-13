@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import java.net.URL;
 
 public class ChatbotFragment extends Fragment {
 
@@ -36,7 +39,7 @@ public class ChatbotFragment extends Fragment {
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                    Uri uri = Uri.parse("http://www.sookmyung.ac.kr");
+                    Uri uri = Uri.parse("http://www.sookmyung.ac.kr/");
                     Intent intent1 = new Intent(Intent.ACTION_VIEW,uri);
                     startActivity(intent1);
             }
@@ -46,7 +49,7 @@ public class ChatbotFragment extends Fragment {
         btn2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Uri uri = Uri.parse("http://www.lib.sookmyung.ac.kr");
+                Uri uri = Uri.parse("http://lib.sookmyung.ac.kr/");
                 Intent intent2 = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent2);
             }
@@ -56,7 +59,7 @@ public class ChatbotFragment extends Fragment {
         btn3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Uri uri = Uri.parse("http://www.snowe.sookmyung.ac.kr");
+                Uri uri = Uri.parse("http://snowe.sookmyung.ac.kr/");
                 Intent intent3 = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent3);
             }

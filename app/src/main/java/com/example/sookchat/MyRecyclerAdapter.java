@@ -12,14 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
-    private ArrayList<Data> mDataList;
+    private List<Data> mDataList;
     private Context mContext;
 
-    public MyRecyclerAdapter(Context mContext, ArrayList<Data> mData) {
+    public MyRecyclerAdapter(Context mContext, List<Data> mData) {
         this.mContext = mContext;
         this.mDataList = mData;
     }
@@ -27,13 +29,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
-        TextView contents;
+        TextView content;
+
         CardView cv; //for touch listener
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title_text);
-            contents = itemView.findViewById(R.id.contents_text);
+            content = itemView.findViewById(R.id.contents_text);
             cv=itemView.findViewById(R.id.cv);
         }
     }
@@ -51,9 +54,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Data item = mDataList.get(position);
-        holder.title.setText(item.getTitle());
-        holder.contents.setText(item.getContents());
+        Data data = mDataList.get(position);
+        holder.title.setText(data.getTitle());
+        holder.content.setText(data.getContent());
+
+
         holder.cv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -62,10 +67,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             }
         });
     }
-        @Override
-        public int getItemCount () {
-            return mDataList.size();
-        }
+    @Override
+    public int getItemCount () {
+        return mDataList.size();
+    }
 
 
 }
