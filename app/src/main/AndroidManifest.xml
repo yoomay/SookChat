@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC06l4T7NNpkRLfiGm7HMIbHqJsR7VI8Jk"></meta-data>
+            android:value="YOUR_KEY"></meta-data>
         <activity
             android:name=".WatsonActivity"
             android:label="@string/title_activity_main2"

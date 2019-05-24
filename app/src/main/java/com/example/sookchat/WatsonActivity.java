@@ -241,18 +241,100 @@ public class WatsonActivity extends AppCompatActivity {
                             .build();
                     MessageResponse response = watsonAssistant.message(options).execute();
                     Log.i(TAG, "run: "+response);
+
                     final Message outMessage = new Message();
+
+
+
                     if (response != null &&
                             response.getOutput() != null &&
-                            !response.getOutput().getGeneric().isEmpty() &&
-                            "text".equals(response.getOutput().getGeneric().get(0).getResponseType())) {
-                        outMessage.setMessage(response.getOutput().getGeneric().get(0).getText());
-                        outMessage.setId("2");
+                            !response.getOutput().getGeneric().isEmpty() ) {
 
-                        messageArrayList.add(outMessage);
 
-                        // speak the message
-                        new SayTask().execute(outMessage.getMessage());
+                        if ("text".equals(response.getOutput().getGeneric().get(0).getResponseType())) {
+
+                            outMessage.setMessage(response.getOutput().getGeneric().get(0).getText());
+
+
+                            outMessage.setId("2");
+
+                            messageArrayList.add(outMessage);
+
+                            if (response != null &&
+                                    response.getOutput() != null &&
+                                    !response.getOutput().getGeneric().isEmpty() &&
+                                    response.getOutput().getGeneric().get(1).getOptions() != null) {
+
+
+                                String optionString;
+                                optionString = response.getOutput().getGeneric().get(1).getTitle();
+
+
+                                try {
+
+                                    for (int i = 0; response.getOutput().getGeneric().get(1).getOptions().get(i) != null; i++) {
+
+
+                                        optionString = optionString + "\n" + response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel();
+
+
+                                    }
+                                } catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                final Message outMessageOptions = new Message();
+                                outMessageOptions.setMessage(optionString);
+                                outMessageOptions.setId("2");
+                                messageArrayList.add(outMessageOptions);
+
+
+
+                            }
+
+
+
+                        }
+
+
+                        else if (response.getOutput().getGeneric().get(0).getOptions().get(0).getValue() != null) {
+
+                            /*String s = "hello";
+
+                            final Message outMessageO = new Message();
+                            outMessageO.setMessage(s);
+                            outMessageO.setId("2");
+                            messageArrayList.add(outMessageO);*/
+
+                            String optionString;
+                            optionString = response.getOutput().getGeneric().get(0).getTitle();
+
+
+                            try {
+
+                                for (int i = 0; response.getOutput().getGeneric().get(0).getOptions().get(i) != null; i++) {
+
+
+                                    optionString = optionString + "\n" + response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel();
+
+
+                                }
+                            } catch (IndexOutOfBoundsException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            final Message outMessageOptions = new Message();
+                            outMessageOptions.setMessage(optionString);
+                            outMessageOptions.setId("2");
+                            messageArrayList.add(outMessageOptions);
+
+
+
+                        }
+
+
 
                         runOnUiThread(new Runnable() {
                             public void run() {
@@ -264,7 +346,16 @@ public class WatsonActivity extends AppCompatActivity {
 
                             }
                         });
+
+
                     }
+
+
+
+
+
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
