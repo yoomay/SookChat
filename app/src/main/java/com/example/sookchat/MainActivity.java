@@ -1,25 +1,27 @@
 package com.example.sookchat;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends FragmentActivity {
 
     // FrameLayout에 각 메뉴의 Fragment를 바꿔 줌
     private FragmentManager fragmentManager = getSupportFragmentManager();
-    // 4개의 메뉴에 들어갈 Fragment들
+    // 3개의 메뉴에 들어갈 Fragment들
     private AgoraFragment agoraFragment = new AgoraFragment();
     private ChatbotFragment chatbotFragment = new ChatbotFragment();
     private MapFragment mapFragment = new MapFragment();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FragmentPagerAdapter adapterViewPager;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -48,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
                 return true;
             }
         });
-    }
+          }
+
 }
+
+
