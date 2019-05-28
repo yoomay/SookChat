@@ -50,7 +50,7 @@ public class WatsonActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ChatAdapter mAdapter;
     private ArrayList messageArrayList;
-    private EditText inputMessage;
+    public EditText inputMessage;
     private ImageButton btnSend;
     private ImageButton btnRecord;
     StreamPlayer streamPlayer = new StreamPlayer();
@@ -99,7 +99,7 @@ public class WatsonActivity extends AppCompatActivity {
         btnSend = findViewById(R.id.btn_send);
         btnRecord = findViewById(R.id.btn_record);
         String customFont = "NotoSerif-Regular.ttf";
-       Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
         inputMessage.setTypeface(typeface);
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -121,11 +121,10 @@ public class WatsonActivity extends AppCompatActivity {
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Permission to record denied");
-            makeRequest();
+            //makeRequest();
         } else {
             Log.i(TAG, "Permission to record was already granted");
         }
-
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             @Override
@@ -242,10 +241,9 @@ public class WatsonActivity extends AppCompatActivity {
                     MessageResponse response = watsonAssistant.message(options).execute();
                     Log.i(TAG, "run: "+response);
 
+
+                    //get Message from Watson
                     final Message outMessage = new Message();
-
-
-
                     if (response != null &&
                             response.getOutput() != null &&
                             !response.getOutput().getGeneric().isEmpty() ) {
@@ -254,10 +252,7 @@ public class WatsonActivity extends AppCompatActivity {
                         if ("text".equals(response.getOutput().getGeneric().get(0).getResponseType())) {
 
                             outMessage.setMessage(response.getOutput().getGeneric().get(0).getText());
-
-
                             outMessage.setId("2");
-
                             messageArrayList.add(outMessage);
 
                             if (response != null &&
@@ -265,29 +260,25 @@ public class WatsonActivity extends AppCompatActivity {
                                     !response.getOutput().getGeneric().isEmpty() &&
                                     response.getOutput().getGeneric().get(1).getOptions() != null) {
 
-
                                 String optionString;
                                 optionString = response.getOutput().getGeneric().get(1).getTitle();
-
-
+                                Message outMessageOptions;
                                 try {
-
                                     for (int i = 0; response.getOutput().getGeneric().get(1).getOptions().get(i) != null; i++) {
-
-
-                                        optionString = optionString + "\n" + response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel();
-
+                                        outMessageOptions=new Message();
+                                        outMessageOptions.setOptions(response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel());
+                                        outMessageOptions.setId("3");
+                                        messageArrayList.add(outMessageOptions);
 
                                     }
                                 } catch (IndexOutOfBoundsException e) {
                                     e.printStackTrace();
                                 }
 
-
-                                final Message outMessageOptions = new Message();
-                                outMessageOptions.setMessage(optionString);
-                                outMessageOptions.setId("2");
-                                messageArrayList.add(outMessageOptions);
+                                /**final Message outMessageOptions = new Message();
+                                 outMessageOptions.setOptions(optionString);
+                                 outMessageOptions.setId("3");
+                                 messageArrayList.add(outMessageOptions);**/
 
 
 
@@ -297,26 +288,48 @@ public class WatsonActivity extends AppCompatActivity {
 
                         }
 
+                        else if (response.getOutput().getGeneric().get(1).getOptions().get(0).getValue() != null) {
 
-                        else if (response.getOutput().getGeneric().get(0).getOptions().get(0).getValue() != null) {
-
-                            /*String s = "hello";
-
-                            final Message outMessageO = new Message();
-                            outMessageO.setMessage(s);
-                            outMessageO.setId("2");
-                            messageArrayList.add(outMessageO);*/
 
                             String optionString;
                             optionString = response.getOutput().getGeneric().get(0).getTitle();
+                            Message outMessageOptions;
+                            try {
+
+                                for (int i = 0; response.getOutput().getGeneric().get(1).getOptions().get(i) != null; i++) {
 
 
+                                    //optionString = optionString + "\n" + response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel();
+                                    outMessageOptions = new Message();
+                                    outMessageOptions.setOptions(response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel());
+                                    outMessageOptions.setId("3");
+                                    messageArrayList.add(outMessageOptions);
+
+
+                                }
+                            } catch (IndexOutOfBoundsException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                        else if (response.getOutput().getGeneric().get(0).getOptions().get(0).getValue() != null) {
+
+
+                            String optionString;
+                            optionString = response.getOutput().getGeneric().get(0).getTitle();
+                            Message outMessageOptions ;
                             try {
 
                                 for (int i = 0; response.getOutput().getGeneric().get(0).getOptions().get(i) != null; i++) {
 
 
-                                    optionString = optionString + "\n" + response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel();
+                                    //optionString = optionString + "\n" + response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel();
+                                    outMessageOptions=new Message();
+                                    outMessageOptions.setOptions(response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel());
+                                    outMessageOptions.setId("3");
+                                    messageArrayList.add(outMessageOptions);
+
 
 
                                 }
@@ -325,14 +338,16 @@ public class WatsonActivity extends AppCompatActivity {
                             }
 
 
-                            final Message outMessageOptions = new Message();
-                            outMessageOptions.setMessage(optionString);
-                            outMessageOptions.setId("2");
-                            messageArrayList.add(outMessageOptions);
-
+                           /*final Message outMessageOptions = new Message();
+                            outMessageOptions.setOptions(optionString);
+                            outMessageOptions.setId("3");
+                            messageArrayList.add(outMessageOptions);*/
 
 
                         }
+
+
+
 
 
 
@@ -377,7 +392,6 @@ public class WatsonActivity extends AppCompatActivity {
             return "Did synthesize";
         }
     }
-
     //Record a message via Watson Speech to Text
     private void recordMessage() {
         if (listening != true) {
@@ -407,11 +421,11 @@ public class WatsonActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Check Internet Connection
+
+    /* Check Internet Connection
      *
-     * @return
-     */
+     * @return*/
+
     private boolean checkInternetConnection() {
         // get Connectivity Manager object to check connection
         ConnectivityManager cm =
@@ -495,6 +509,3 @@ public class WatsonActivity extends AppCompatActivity {
 
 
 }
-
-
-

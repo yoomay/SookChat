@@ -13,6 +13,7 @@
     <TextView
         android:id="@+id/message"
         android:autoLink="web"
+        android:bufferType="spannable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
