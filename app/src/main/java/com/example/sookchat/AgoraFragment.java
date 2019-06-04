@@ -1,13 +1,22 @@
 package com.example.sookchat;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -27,9 +36,20 @@ import retrofit2.Response;
 
 public class AgoraFragment extends Fragment {
 
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
     private RecyclerView recycler_view;
     private MyRecyclerAdapter myAdapter;
     private List<Data> dataList = new ArrayList<Data>();
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState){
+
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,27 +57,31 @@ public class AgoraFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_agora,container,false);
 
+        //toolbar
+        Toolbar toolbar = (Toolbar)view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        if(dataList.size()!=0){
+            dataList.clear();
+        }
+
         //recycler View
         recycler_view=(RecyclerView)view.findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(true);
-        myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
+        //myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
 
-        RecyclerView.LayoutManager mLayoutManager=new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager=new GridLayoutManager(getActivity(),2);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.setAdapter(myAdapter);
+        //recycler_view.setAdapter(myAdapter);
+
         getDataList();
 
         return view;
 
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-
-    }
 
 
 
@@ -77,12 +101,17 @@ public class AgoraFragment extends Fragment {
                 if (response==null){
                     Toast.makeText(getActivity(), "Somthing Went Wrong!", Toast.LENGTH_SHORT).show();
                 }else{
+
                     for (Data data:response.body()){
                         dataList.add(data);
                     }
+
+                    myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
+                    recycler_view.setAdapter(myAdapter);
+
                     Log.i("RESPONSE: ", ""+response.toString());
                 }
-                myAdapter.notifyDataSetChanged();
+                //myAdapter.notifyDataSetChanged();
             }
             @Override
             public void onFailure(Call<List<Data>> call, Throwable t) {
@@ -91,6 +120,53 @@ public class AgoraFragment extends Fragment {
             }
         });
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_toolbar, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+
+            queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    myAdapter.getFilter().filter(newText);
+                    Log.i("onQueryTextChange", newText);
+
+                    return true;
+                }
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Log.i("onQueryTextSubmit", query);
+
+                    return false;
+                }
+            };
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                // Not implemented here
+                return false;
+            default:
+                break;
+        }
+        searchView.setOnQueryTextListener(queryTextListener);
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
 }
