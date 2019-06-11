@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/library"
+            android:src="@drawable/librarybtn"
             android:text="숙명여대"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
