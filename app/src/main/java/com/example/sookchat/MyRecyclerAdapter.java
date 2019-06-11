@@ -14,6 +14,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+
+import static com.example.sookchat.RetroFitApiClient.BASE_URL;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+import static com.example.sookchat.RetroFitApiClient.IMAGE_DIR;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +40,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView content;
+        ImageView image;
 
         CardView cv; //for touch listener
 
@@ -37,6 +48,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             super(itemView);
             title = itemView.findViewById(R.id.title_text);
             content = itemView.findViewById(R.id.contents_text);
+            image = itemView.findViewById(R.id.agora_image);
             cv=itemView.findViewById(R.id.cv);
         }
     }
@@ -57,16 +69,22 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         Data data = mDataList.get(position);
         holder.title.setText(data.getTitle());
         holder.content.setText(data.getContent());
+        Glide.with(mContext)
+                .load( IMAGE_DIR + data.getFilename() + ".jpg")
+                .centerCrop()
+                .into(holder.image);
+
 
 
         holder.cv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent i = new Intent(mContext,CardClickActivity.class);
+                Intent i = new Intent(mContext, CardClickActivity.class);
                 mContext.startActivity(i);
             }
         });
     }
+
     @Override
     public int getItemCount () {
         return mDataList.size();

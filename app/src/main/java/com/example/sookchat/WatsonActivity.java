@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -21,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import android.support.v7.widget.Toolbar;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneHelper;
 import com.ibm.watson.developer_cloud.android.library.audio.MicrophoneInputStream;
 import com.ibm.watson.developer_cloud.android.library.audio.StreamPlayer;
@@ -42,6 +42,7 @@ import com.ibm.watson.developer_cloud.text_to_speech.v1.TextToSpeech;
 import com.ibm.watson.developer_cloud.text_to_speech.v1.model.SynthesizeOptions;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -51,7 +52,7 @@ public class WatsonActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ChatAdapter mAdapter;
     private ArrayList messageArrayList;
-    private EditText inputMessage;
+    public EditText inputMessage;
     private ImageButton btnSend;
     private ImageButton btnRecord;
     StreamPlayer streamPlayer = new StreamPlayer();
@@ -62,15 +63,16 @@ public class WatsonActivity extends AppCompatActivity {
     private static final int RECORD_REQUEST_CODE = 101;
     private boolean listening = false;
     private MicrophoneInputStream capture;
-    private Context mContext;
+    public static Context mContext;
     private MicrophoneHelper microphoneHelper;
 
     private Assistant watsonAssistant;
     private SessionResponse watsonAssistantSession;
     private SpeechToText speechService;
     private TextToSpeech textToSpeech;
-    private Toolbar mToolbar;
-
+    public int FLAG=701;
+    public String ClickMessage;
+    public String imageSource;
     private void createServices() {
         watsonAssistant = new Assistant("2018-11-08", new IamOptions.Builder()
                 .apiKey(mContext.getString(R.string.assistant_apikey))
@@ -95,18 +97,18 @@ public class WatsonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watson);
 
-        mContext = getApplicationContext();
+        mContext=this;
 
         inputMessage = findViewById(R.id.message);
         btnSend = findViewById(R.id.btn_send);
         btnRecord = findViewById(R.id.btn_record);
         String customFont = "NotoSerif-Regular.ttf";
-       Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
+        Typeface typeface = Typeface.createFromAsset(getAssets(), customFont);
         inputMessage.setTypeface(typeface);
         recyclerView = findViewById(R.id.recycler_view);
 
         messageArrayList = new ArrayList<>();
-        mAdapter = new ChatAdapter(messageArrayList);
+        mAdapter = new ChatAdapter(mContext,messageArrayList);
         microphoneHelper = new MicrophoneHelper(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -123,27 +125,21 @@ public class WatsonActivity extends AppCompatActivity {
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             Log.i(TAG, "Permission to record denied");
-            makeRequest();
+            //makeRequest();
         } else {
             Log.i(TAG, "Permission to record was already granted");
         }
 
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+        btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, final int position) {
-                Message audioMessage = (Message) messageArrayList.get(position);
-                if (audioMessage != null && !audioMessage.getMessage().isEmpty()) {
-                    new SayTask().execute(audioMessage.getMessage());
+            public void onClick(View v) {
+                if (checkInternetConnection()) {
+                    FLAG=800;
+                    sendMessage();
+                    FLAG=701;
                 }
             }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                recordMessage();
-
-            }
-        }));
+        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,23 +150,12 @@ public class WatsonActivity extends AppCompatActivity {
             }
         });
 
-        btnRecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recordMessage();
-            }
-        });
 
         createServices();
         sendMessage();
-
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("SookBOT");
-        setSupportActionBar(mToolbar);
     }
 
-    ;
+
 
     // Speech-to-Text Record Audio permission
     @Override
@@ -199,7 +184,7 @@ public class WatsonActivity extends AppCompatActivity {
                 }
             }
         }
-        // if (!permissionToRecordAccepted ) finish();
+
 
     }
 
@@ -210,24 +195,31 @@ public class WatsonActivity extends AppCompatActivity {
     }
 
     // Sending a message to Watson Assistant Service
-    private void sendMessage() {
+    public void sendMessage() {
+        final String inputmessage;
+        if(FLAG==700){
+            inputmessage=ClickMessage;
+            this.inputMessage.setText("");
 
-        final String inputmessage = this.inputMessage.getText().toString().trim();
+        }
+        else if(FLAG==800){inputmessage="처음으로";
+        }
+        else {
+            inputmessage = this.inputMessage.getText().toString().trim();
+        }
         if (!this.initialRequest) {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
-        } else {
+        }
+        else {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("100");
             this.initialRequest = false;
-            Toast.makeText(getApplicationContext(), "Tap on the message for Voice", Toast.LENGTH_LONG).show();
-
         }
-
-        this.inputMessage.setText("");
+       this.inputMessage.setText("");
         mAdapter.notifyDataSetChanged();
 
         Thread thread = new Thread(new Runnable() {
@@ -248,30 +240,110 @@ public class WatsonActivity extends AppCompatActivity {
                             .build();
                     MessageResponse response = watsonAssistant.message(options).execute();
                     Log.i(TAG, "run: "+response);
+
+
+                    //get Message from Watson
                     final Message outMessage = new Message();
                     if (response != null &&
                             response.getOutput() != null &&
-                            !response.getOutput().getGeneric().isEmpty() &&
-                            "text".equals(response.getOutput().getGeneric().get(0).getResponseType())) {
-                        outMessage.setMessage(response.getOutput().getGeneric().get(0).getText());
-                        outMessage.setId("2");
+                            !response.getOutput().getGeneric().isEmpty() ) {
 
-                        messageArrayList.add(outMessage);
+                        if ("text".equals(response.getOutput().getGeneric().get(0).getResponseType())) {
 
-                        // speak the message
-                        new SayTask().execute(outMessage.getMessage());
+                            outMessage.setMessage(response.getOutput().getGeneric().get(0).getText());
+                            outMessage.setId("2");
+                            messageArrayList.add(outMessage);
+
+
+                            if (response != null &&
+                                    response.getOutput() != null &&
+                                    !response.getOutput().getGeneric().isEmpty() &&
+                                    response.getOutput().getGeneric().get(1).getOptions() != null) {
+
+                                Message outMessageOptions;
+                                try {
+                                    for (int i = 0; response.getOutput().getGeneric().get(1).getOptions().get(i) != null; i++) {
+                                        outMessageOptions=new Message();
+
+                                        outMessageOptions.setOptions(response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel());
+
+                                        outMessageOptions.setId("3");
+                                        messageArrayList.add(outMessageOptions);
+
+                                    }
+                                } catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            else if("image".equals(response.getOutput().getGeneric().get(1).getResponseType())){
+                                Message outMessageImages;
+                                try{
+                                    outMessageImages=new Message();
+                                    outMessageImages.setId("4");
+                                    imageSource=response.getOutput().getGeneric().get(1).getSource();
+                                    messageArrayList.add(outMessageImages);
+                                }
+                                catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        else if(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue() != null||response.getOutput().getGeneric().get(1).getOptions().get(0).getValue() != null) {
+                            if (response.getOutput().getGeneric().get(0).getOptions().get(0).getValue() != null) {
+
+
+                                Message outMessageOptions;
+                                try {
+
+                                    for (int i = 0; response.getOutput().getGeneric().get(0).getOptions().get(i) != null; i++) {
+
+                                        outMessageOptions = new Message();
+                                        outMessageOptions.setOptions(response.getOutput().getGeneric().get(0).getOptions().get(i).getLabel());
+                                        outMessageOptions.setId("3");
+                                        messageArrayList.add(outMessageOptions);
+
+
+                                    }
+                                } catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                            else if (response.getOutput().getGeneric().get(1).getOptions().get(0).getValue() != null) {
+
+                                String optionString;
+                                optionString = response.getOutput().getGeneric().get(1).getTitle();
+                                Message outMessageOptions;
+                                try {
+                                    for (int i = 0; response.getOutput().getGeneric().get(1).getOptions().get(i) != null; i++) {
+                                        outMessageOptions = new Message();
+                                        outMessageOptions.setOptions(response.getOutput().getGeneric().get(1).getOptions().get(i).getLabel());
+                                        outMessageOptions.setId("3");
+                                        messageArrayList.add(outMessageOptions);
+                                    }
+                                } catch (IndexOutOfBoundsException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        }
 
                         runOnUiThread(new Runnable() {
                             public void run() {
                                 mAdapter.notifyDataSetChanged();
-                                if (mAdapter.getItemCount() > 1) {
-                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount() - 1);
+                              //  if (mAdapter.getItemCount() >= 0) {
+                                    recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, mAdapter.getItemCount()-1);
 
-                                }
+                                //}
 
                             }
                         });
                     }
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -293,7 +365,6 @@ public class WatsonActivity extends AppCompatActivity {
             return "Did synthesize";
         }
     }
-
     //Record a message via Watson Speech to Text
     private void recordMessage() {
         if (listening != true) {
@@ -304,7 +375,7 @@ public class WatsonActivity extends AppCompatActivity {
                     try {
                         speechService.recognizeUsingWebSocket(getRecognizeOptions(capture), new MicrophoneRecognizeDelegate());
                     } catch (Exception e) {
-                        showError(e);
+
                     }
                 }
             }).start();
@@ -323,11 +394,11 @@ public class WatsonActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Check Internet Connection
+
+    /* Check Internet Connection
      *
-     * @return
-     */
+     * @return*/
+
     private boolean checkInternetConnection() {
         // get Connectivity Manager object to check connection
         ConnectivityManager cm =
@@ -368,18 +439,7 @@ public class WatsonActivity extends AppCompatActivity {
             }
         }
 
-        @Override
-        public void onError(Exception e) {
-            showError(e);
-            enableMicButton();
-        }
 
-        @Override
-        public void onDisconnected() {
-            enableMicButton();
-        }
-
-    }
 
     private void showMicText(final String text) {
         runOnUiThread(new Runnable() {
@@ -390,14 +450,7 @@ public class WatsonActivity extends AppCompatActivity {
         });
     }
 
-    private void enableMicButton() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                btnRecord.setEnabled(true);
-            }
-        });
-    }
+
 
     private void showError(final Exception e) {
         runOnUiThread(new Runnable() {
@@ -411,6 +464,4 @@ public class WatsonActivity extends AppCompatActivity {
 
 
 }
-
-
-
+}

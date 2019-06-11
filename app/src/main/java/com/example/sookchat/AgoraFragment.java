@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,7 +39,7 @@ public class AgoraFragment extends Fragment {
         recycler_view.setHasFixedSize(true);
         myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
 
-        RecyclerView.LayoutManager mLayoutManager=new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager=new GridLayoutManager(getActivity(),2);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.setAdapter(myAdapter);
@@ -52,27 +53,9 @@ public class AgoraFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        //prepareData();
+
     }
 
-    /**
-     public void prepareData(){
-     for (int i = 0 ; i<10 ; i++){
-     dataList.add(new Data("명신관","설명\n설명\n설명"+i));
-     dataList.add(new Data("명신관","설명설명설명"+i));
-     dataList.add(new Data("명신관","설명\n설명\n설명"+i));
-     dataList.add(new Data("명신관","설명설명설명"+i));
-
-     }
-     }**/
-
-
-    /**@Override
-    public void onItemClicked(int position) {
-    Intent i = new Intent(getActivity(),CardClickActivity.class);
-    startActivity(i);
-
-    }**/
 
     public void getDataList() {
         RetroFitApiInterface apiInterface = RetroFitApiClient.getClient().create(RetroFitApiInterface.class);
@@ -81,7 +64,7 @@ public class AgoraFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Data>> call, Response<List<Data>> response) {
                 if (response==null){
-                    Toast.makeText(getActivity(), "Somthing Went Wrong!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Something Went Wrong!", Toast.LENGTH_SHORT).show();
                 }else{
                     for (Data data:response.body()){
                         dataList.add(data);

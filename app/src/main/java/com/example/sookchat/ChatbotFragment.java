@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ImageButton;
+
 import java.net.URL;
 
 public class ChatbotFragment extends Fragment {
@@ -22,9 +24,11 @@ public class ChatbotFragment extends Fragment {
         //Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_chatbot,container,false);
         Button btn0=(Button) v.findViewById(R.id.btn_main);
-        Button btn1=(Button) v.findViewById(R.id.btn_1);
-        Button btn2=(Button) v.findViewById(R.id.btn_2);
-        Button btn3=(Button) v.findViewById(R.id.btn_3);
+        ImageButton btn1=(ImageButton) v.findViewById(R.id.btn_1);
+        ImageButton btn2=(ImageButton) v.findViewById(R.id.btn_2);
+        ImageButton btn3=(ImageButton) v.findViewById(R.id.btn_3);
+        ImageButton btn4=(ImageButton) v.findViewById(R.id.btn_4);
+        ImageButton btn5=(ImageButton) v.findViewById(R.id.btn_5);
 
         btn0.setOnClickListener(new View.OnClickListener(){
 
@@ -60,6 +64,26 @@ public class ChatbotFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Uri uri = Uri.parse("http://snowe.sookmyung.ac.kr/");
+                Intent intent3 = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent3);
+            }
+
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Uri uri = Uri.parse("http://portal.sookmyung.ac.kr/irj/portal");
+                Intent intent3 = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent3);
+            }
+
+        });
+
+        btn5.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Uri uri = Uri.parse("https://snowboard.sookmyung.ac.kr/");
                 Intent intent3 = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent3);
             }

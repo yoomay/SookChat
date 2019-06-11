@@ -6,6 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetroFitApiClient {
 
     public static final String BASE_URL = "http://chatbot2019.cafe24.com/";
+    public static final String IMAGE_DIR = BASE_URL + "images/";
+
     private static Retrofit retrofit = null;
     public static Retrofit getClient(){
         if(retrofit==null){

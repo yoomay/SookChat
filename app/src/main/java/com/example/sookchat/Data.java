@@ -5,11 +5,13 @@ public class Data {
     private int catid;
     private String title;
     private String content;
+    private String filename;
 
-    public Data(int catid, String title, String content) {
+    public Data(int catid, String title, String content, String filename) {
         this.catid = catid;
         this.title = title;
         this.content = content;
+        this.filename = filename;
     }
 
     public int getCatid() {
@@ -34,5 +36,13 @@ public class Data {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

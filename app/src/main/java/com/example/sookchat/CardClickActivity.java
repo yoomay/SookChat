@@ -21,7 +21,7 @@ public class CardClickActivity extends AppCompatActivity {
             // Fragment로 넘길 Image Resource
             ArrayList<Integer> listImage = new ArrayList<>();
             listImage.add(R.drawable.cafeteria_hyu);
-            listImage.add(R.drawable.p1);
+            listImage.add(R.drawable.ic_crown);
 
             ViewPager viewPager = findViewById(R.id.viewPager);
             FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
