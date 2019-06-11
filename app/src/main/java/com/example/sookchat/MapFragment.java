@@ -51,7 +51,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,GoogleMa
 
     private int[] myImageList = new int[]{R.drawable.school,R.drawable.newmyeong, R.drawable.myeong,
             R.drawable.law,R.drawable.sun,R.drawable.student,R.drawable.hang,R.drawable.su,R.drawable.noon,R.drawable.injae,
-            R.drawable.science,R.drawable.library,R.drawable.sociology,R.drawable.art,
+            R.drawable.science,R.drawable.librarybtn,R.drawable.sociology,R.drawable.art,
             R.drawable.medicine,R.drawable.millenium,R.drawable.music,};
     private String[] myImageNameList = new String[]{"숙명여자대학교","새힘관","명신관","진리관","순헌관",
             "학생회관","행정관","수련관","행파관","인재관",

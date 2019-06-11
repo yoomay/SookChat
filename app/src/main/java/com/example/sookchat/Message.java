@@ -1,30 +1,28 @@
 package com.example.sookchat;
 
-/**
- * Created by VMac on 17/11/16.
- */
-
-import android.text.SpannableString;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class Message implements Serializable {
   String id, message;
-  SpannableString messageS;
   String options;
+  String url;
 
   public Message() {
   }
 
-  public Message(String id, String message, String createdAt) {
+  public Message(String id, String message, String url) {
     this.id = id;
     this.message = message;
-    this.options = options;
-
+    this.url=url;
 
   }
 
   public String getId() {
+
     return id;
   }
 
@@ -33,6 +31,7 @@ public class Message implements Serializable {
   }
 
   public String getMessage() {
+
     return message;
   }
 
@@ -40,14 +39,30 @@ public class Message implements Serializable {
     this.message = message;
   }
 
-  public String getOptions(){return options;}
+  public String getOptions(){
+    return options;
 
-  public void setOptions(String options){this.options = options;}
+  }
 
-  /*public void setMessage1(SpannableString messageS){
-    this.messageS = messageS;
-  }*/
+  public void setOptions(String options) {
 
+    this.options=options;
+  }
 
+  public String getUrl(){
+    return url;
+  }
+
+  public void setUrl(String url){
+    this.url=url;
+  }
+
+  public String getCreatedAt(){
+    Date rightNow = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat(
+            "hh:mm");
+    String timeString = formatter.format(rightNow);
+    return timeString;
+  }
 }
 

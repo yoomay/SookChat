@@ -14,7 +14,7 @@
 
     <!--Watson Speech To Text(STT) service credentials-->
     <!-- REPLACE `STT_API_KEY_HERE` with Watson Speech to Text service API Key-->
-    <string name="STT_apikey">STT_API_KEY_HERE</string>
+    <string name="STT_apikey">STT_API_KEY_HERE</string>ol
 
     <!-- REPLACE `STT_URL_HERE` with Watson Speech to Text service URL-->
     <string name="STT_url">STT_URL_HERE</string>

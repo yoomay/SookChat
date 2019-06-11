@@ -4,73 +4,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.sookchat.AgoraFragment">
+    tools:context="com.example.sookchat.ChatbotFragment">
 
 
     <ImageView
         android:id="@+id/sook_logo"
-        android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
         android:src="@drawable/logo" />
 
-<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
-    <Button
-        android:id="@+id/btn_main"
-        android:layout_width="340dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_search"
-        android:text="무엇이든지 물어보세요!"
-        android:textColor="#000000"
-        android:textSize="15sp" />
-</RelativeLayout>
 
-<LinearLayout
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_main"
+            android:layout_width="340dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_search"
+            android:text="무엇이든지 물어보세요!"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="20dp"
+        android:paddingRight="10dp">
+
+
+        <ImageButton
+            android:id="@+id/btn_1"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sookmyung"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/btn_2"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main"
+            android:scaleType="fitCenter"
+            android:src="@drawable/librarybtn"
+            android:text="숙명여대"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/btn_3"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main"
+            android:scaleType="fitCenter"
+            android:src="@drawable/snowe"
+            android:text="숙명여대"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="25dp"
+        android:layout_gravity="center_horizontal">
+
+
+        <ImageButton
+            android:id="@+id/btn_4"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main"
+            android:scaleType="fitCenter"
+            android:src="@drawable/portal"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/btn_5"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_main"
+            android:scaleType="fitCenter"
+            android:src="@drawable/snowboard"
+            android:text="숙명여대"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="38dp"
+            android:src="@drawable/robot_watson"
+            android:textColor="#0C0000"
+            android:layout_marginTop="12dp"
+            android:textSize="40dp" />
 
-<Button
-    android:id="@+id/btn_1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="2dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_main"
-    android:text="숙명여대"
-    android:textColor="#FFFFFF"
-    android:textSize="15sp" />
+        <TextView
+            android:id="@+id/robottext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13.3dp"
+            android:background="@drawable/bg_bubble_self"
+            android:elevation="3dp"
+            android:textColor="#fff"
+            android:text=" 안녕하세요! 오늘도 좋은 하루 되세요! :) " />
 
-<Button
-    android:id="@+id/btn_2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="2dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_main"
-    android:text="도서관"
-    android:textColor="#FFFFFF"
-    android:textSize="15sp" />
-
-<Button
-    android:id="@+id/btn_3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:background="@drawable/btn_main"
-    android:text="SNOWE"
-    android:textColor="#FFFFFF"
-    android:textSize="15sp" />
-</LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
