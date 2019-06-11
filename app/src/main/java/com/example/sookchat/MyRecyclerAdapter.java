@@ -79,11 +79,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         holder.cv.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //mListener.onClick(v, pos);
+
                 Intent intent = new Intent(mContext, CardClickActivity.class);
-                //int itemPosition = holder.getAdapterPosition();
                 intent.putExtra("catid", data.getCatid());
-                mContext.startActivity(intent); //CardClickActivity.class 호출
+                mContext.startActivity(intent);
             }
         });
     }
