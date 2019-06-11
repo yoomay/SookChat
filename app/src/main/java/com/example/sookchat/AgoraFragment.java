@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sookchat.Data;
@@ -28,6 +29,7 @@ import com.example.sookchat.RetroFitApiClient;
 import com.example.sookchat.RetroFitApiInterface;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -54,6 +56,10 @@ public class AgoraFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_agora,container,false);
 
@@ -66,15 +72,14 @@ public class AgoraFragment extends Fragment {
             dataList.clear();
         }
 
-        //recycler View
+        sortview(view);
+
         recycler_view=(RecyclerView)view.findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(true);
-        //myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
 
         RecyclerView.LayoutManager mLayoutManager=new GridLayoutManager(getActivity(),2);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        //recycler_view.setAdapter(myAdapter);
 
         getDataList();
 
@@ -83,14 +88,6 @@ public class AgoraFragment extends Fragment {
     }
 
 
-
-
-    /**@Override
-    public void onItemClicked(int position) {
-    Intent i = new Intent(getActivity(),CardClickActivity.class);
-    startActivity(i);
-
-    }**/
 
     public void getDataList() {
         RetroFitApiInterface apiInterface = RetroFitApiClient.getClient().create(RetroFitApiInterface.class);
@@ -111,7 +108,7 @@ public class AgoraFragment extends Fragment {
 
                     Log.i("RESPONSE: ", ""+response.toString());
                 }
-                //myAdapter.notifyDataSetChanged();
+
             }
             @Override
             public void onFailure(Call<List<Data>> call, Throwable t) {
@@ -120,6 +117,29 @@ public class AgoraFragment extends Fragment {
             }
         });
     }
+
+
+
+    public void sortview(View view){
+        ((TextView)view.findViewById(R.id.sortbyid))
+                .setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Collections.sort(dataList, Data.ById);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                });
+
+        ((TextView)view.findViewById(R.id.sortbyviewer))
+                .setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        Collections.sort(dataList, Data.ByViewers);
+                        myAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
 
 
     @Override
