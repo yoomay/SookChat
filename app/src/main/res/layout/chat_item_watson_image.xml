@@ -12,7 +12,7 @@
         android:id="@+id/watsonImage"
         android:background="@drawable/bubble_watson"
         android:elevation="2dp"
-        android:maxWidth="230dp"
+        android:maxWidth="200dp"
         android:paddingLeft="12dp"
         android:paddingTop="6dp"
         android:paddingRight="12dp"
@@ -33,9 +33,10 @@
         android:id="@+id/text_message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
         android:layout_marginLeft="4dp"
         android:text="11:40"
-        android:textSize="10sp"
+        android:textSize="7sp"
         app:layout_constraintBottom_toBottomOf="@+id/watsonImage"
         app:layout_constraintLeft_toRightOf="@+id/watsonImage" />
 

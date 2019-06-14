@@ -23,7 +23,7 @@
             android:text="New Text"
             android:id="@+id/name_tv"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:gravity="center" />
             <TextView
             android:layout_width="wrap_content"
@@ -33,7 +33,8 @@
             android:text="New Text"
             android:id="@+id/major_tv"
             android:textColor="#000000"
-            android:gravity="center" />
+            android:gravity="center"
+                android:textSize="15dp"/>
 </LinearLayout>
     </LinearLayout>
 

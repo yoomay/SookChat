@@ -5,16 +5,21 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@drawable/bg_bluesky"
     tools:context="com.example.sookchat.ChatbotFragment">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="2dp"
+       >
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:theme="@style/TransparentToolbar"
+            android:elevation="2dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -24,7 +29,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:id="@+id/toolbar_title"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 />
 
         </android.support.v7.widget.Toolbar>
@@ -34,36 +39,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_marginTop="60dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:gravity="center_horizontal"
-        android:background="@drawable/bg_sky">
+              <TextView
+                android:id="@+id/robot_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13.3dp"
+                android:background="@drawable/bg_bubble_watbot"
+                  android:paddingLeft="12dp"
+                  android:paddingTop="8dp"
+                  android:paddingRight="12dp"
+                  android:paddingBottom="8dp"
+                android:elevation="2dp"
+                android:textColor="#fff"
+                android:text=" 안녕하세요! 오늘도 좋은 하루 되세요! :)"
+                  android:textSize="14dp"/>
 
-        <ImageView
-            android:id="@+id/sook_logo"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="138dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal">
 
-            android:layout_marginTop="30dp"
-            android:src="@drawable/ic_university" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/sook_logo"
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:layout_marginTop="112dp"
+                android:src="@drawable/ic_sm_school" />
+        </LinearLayout>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp">
+        android:layout_marginTop="224dp">
 
         <Button
             android:id="@+id/btn_main"
             android:layout_width="390dp"
-            android:layout_height="80dp"
+            android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/btn_search"
             android:text="무엇이든지 물어보세요!"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_marginBottom="25dp"/>
     </RelativeLayout>
     </FrameLayout>
@@ -149,31 +178,6 @@
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="62dp"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="38dp"
-            android:src="@drawable/robot_watson"
-            android:textColor="#0C0000"
-            android:layout_marginTop="12dp"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/robottext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13.3dp"
-            android:background="@drawable/bg_bubble_self"
-            android:elevation="3dp"
-            android:textColor="#fff"
-            android:text=" 안녕하세요! 오늘도 좋은 하루 되세요! :) " />
-
-    </LinearLayout>
 
 </LinearLayout>

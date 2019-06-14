@@ -24,7 +24,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
         android:text="SookBOT"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@+id/image_message_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +42,7 @@
         android:paddingRight="12dp"
         android:paddingBottom="6dp"
         android:textColor="#000000"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/image_message_profile"
         app:layout_constraintTop_toBottomOf="@+id/text_message_name" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:text="11:40"
-        android:textSize="10sp"
+        android:textSize="7sp"
         app:layout_constraintBottom_toBottomOf="@+id/message"
         app:layout_constraintLeft_toRightOf="@+id/message" />
 

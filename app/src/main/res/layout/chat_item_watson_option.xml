@@ -23,7 +23,8 @@
         android:fontFamily="sans-serif"
         android:textColor="@android:color/black"
         android:textIsSelectable="true"
-        android:textSize="12sp" />
+        android:textSize="10sp"
+        android:text="학사FAQ"/>
 
 
     </LinearLayout>
