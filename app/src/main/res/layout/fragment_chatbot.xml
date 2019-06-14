@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/sookmyung"
+            android:src="@drawable/cafeteria_hyu"
             android:textSize="15sp" />
 
         <ImageButton
@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/librarybtn"
+            android:src="@drawable/cafeteria_hyu"
             android:text="숙명여대"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/snowe"
+            android:src="@drawable/cafeteria_hyu"
             android:text="숙명여대"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
@@ -99,7 +99,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/portal"
+            android:src="@drawable/cafeteria_hyu"
             android:textSize="15sp" />
 
         <ImageButton
@@ -110,7 +110,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main"
             android:scaleType="fitCenter"
-            android:src="@drawable/snowboard"
+            android:src="@drawable/cafeteria_hyu"
             android:text="숙명여대"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />

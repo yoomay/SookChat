@@ -6,4 +6,9 @@
     <color name="bg_bubble_self">#304EEE</color>
     <color name="bg_bubble_watbot">#ecf0f1</color>
     <color name="transparent">#00000000</color>
+    <color name="actionbar_opacity">#00000000</color>
+    <color name="cardcolor">#dedfe1</color>
+    <color name="imagebackground">#9f989b</color>
+
+
 </resources>

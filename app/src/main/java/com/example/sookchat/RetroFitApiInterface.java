@@ -15,5 +15,8 @@ public interface RetroFitApiInterface {
     @GET("getimage.php")
     Call<List<ImageItem>> getImage(@Query("catid") int catid);
 
+    @GET("getrobot.php")
+    Call<List<Robot>> getRobot();
+
 
 }
