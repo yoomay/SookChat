@@ -58,7 +58,7 @@
                   android:paddingBottom="8dp"
                 android:elevation="2dp"
                 android:textColor="#fff"
-                android:text=" 안녕하세요! 오늘도 좋은 하루 되세요! :)"
+                android:text="오늘도 좋은 하루 되세요! :)"
                   android:textSize="14dp"/>
 
         </LinearLayout>
@@ -80,19 +80,19 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="224dp">
+        android:layout_marginTop="226dp">
 
         <Button
             android:id="@+id/btn_main"
             android:layout_width="390dp"
-            android:layout_height="75dp"
+            android:layout_height="65dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/btn_search"
             android:text="무엇이든지 물어보세요!"
             android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:textSize="12sp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginBottom="25dp"/>
     </RelativeLayout>
     </FrameLayout>
