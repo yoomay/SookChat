@@ -21,7 +21,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-
             app:theme="@style/TransparentToolbar"
             >
             <TextView
@@ -66,14 +65,15 @@
                     android:layout_marginLeft="5dp"
                     android:id="@+id/sortbyid"
                     android:textSize="12sp"
-                    android:text="Id"
+                    android:text="기본"
                     android:layout_height="wrap_content" />
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="Viewer"
+                    android:textSize="12sp"
+                    android:text="조회순"
                     android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
                     android:id="@+id/sortbyviewer"

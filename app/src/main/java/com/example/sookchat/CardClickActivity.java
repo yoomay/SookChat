@@ -26,6 +26,7 @@ public class CardClickActivity extends AppCompatActivity {
 
         private List<ImageItem> imageList = new ArrayList<ImageItem>();
         private ViewAdapter adapter;
+        Data data;
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -52,6 +53,13 @@ public class CardClickActivity extends AppCompatActivity {
 
         }
 
+    @Override
+    public void onBackPressed(){
+
+        super.onBackPressed();
+    }
+
+
     public void getDataList(int catid) {
         RetroFitApiInterface apiInterface = RetroFitApiClient.getClient().create(RetroFitApiInterface.class);
         Call<List<ImageItem>> call = apiInterface.getImage(catid);
@@ -65,7 +73,7 @@ public class CardClickActivity extends AppCompatActivity {
                         imageList.add(imageitem);
                     }
                     Log.i("RESPONSE: ", "" + response.toString());
-                    Log.e("imageList배열크기: ", ""+imageList.size());
+
                 }
                 adapter.notifyDataSetChanged();
             }

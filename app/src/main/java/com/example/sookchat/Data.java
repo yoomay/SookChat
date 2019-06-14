@@ -61,7 +61,7 @@ public class Data {
     public static Comparator<Data> ById = new Comparator<Data>() {
         @Override
         public int compare(Data one, Data two) {
-            return -Integer.valueOf(one.catid).compareTo(Integer.valueOf(two.catid));
+            return Integer.valueOf(one.catid).compareTo(Integer.valueOf(two.catid));
         }
     };
 

@@ -31,6 +31,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     private Context mContext;
 
     public MyRecyclerAdapter(Context mContext, List<Data> mData) {
+
         this.mContext = mContext;
         this.mDataList = mData;
         this.mFilteredList = mData;
@@ -39,6 +40,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView viewers;
         TextView title;
         TextView content;
         ImageView image;
@@ -47,6 +49,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
+            viewers = itemView.findViewById(R.id.viewers);
             title = itemView.findViewById(R.id.title_text);
             content = itemView.findViewById(R.id.contents_text);
             image = itemView.findViewById(R.id.agora_image);
@@ -69,6 +72,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         final Data data = mFilteredList.get(position);
+        holder.viewers.setText(data.getViews());
         holder.title.setText(data.getTitle());
         holder.content.setText(data.getContent());
         Glide.with(mContext)

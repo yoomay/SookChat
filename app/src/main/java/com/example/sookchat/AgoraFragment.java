@@ -28,6 +28,7 @@ import com.example.sookchat.R;
 import com.example.sookchat.RetroFitApiClient;
 import com.example.sookchat.RetroFitApiInterface;
 
+import java.sql.SQLData;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +44,8 @@ public class AgoraFragment extends Fragment {
     private RecyclerView recycler_view;
     private MyRecyclerAdapter myAdapter;
     private List<Data> dataList = new ArrayList<Data>();
+
+
 
 
     @Override
@@ -63,6 +66,7 @@ public class AgoraFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_agora,container,false);
 
+
         //toolbar
         Toolbar toolbar = (Toolbar)view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -81,10 +85,23 @@ public class AgoraFragment extends Fragment {
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
 
-        getDataList();
+        //getDataList();
 
         return view;
 
+    }
+
+
+    public void onStart(){
+        dataList.clear();
+        getDataList();
+        myAdapter = new MyRecyclerAdapter(getActivity(),dataList);
+        recycler_view.setAdapter(myAdapter);
+        super.onStart();
+    }
+
+    public void onResume(){
+        super.onResume();
     }
 
 
