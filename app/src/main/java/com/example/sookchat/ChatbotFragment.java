@@ -1,12 +1,21 @@
 package com.example.sookchat;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,6 +30,8 @@ public class ChatbotFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
         //Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_chatbot,container,false);
         Button btn0=(Button) v.findViewById(R.id.btn_main);
@@ -30,6 +41,12 @@ public class ChatbotFragment extends Fragment {
         ImageButton btn4=(ImageButton) v.findViewById(R.id.btn_4);
         ImageButton btn5=(ImageButton) v.findViewById(R.id.btn_5);
 
+        //toolbar
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar_main);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        setHasOptionsMenu(true);
         btn0.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -98,6 +115,22 @@ public class ChatbotFragment extends Fragment {
 
     }
 
+    @Override
+    public void  onCreateOptionsMenu(Menu menu ,MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_maintoolbar,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.action_develop:
+                    Intent developIntent = new Intent(getActivity(),developActivity.class);
+                    startActivity(developIntent);
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }
 

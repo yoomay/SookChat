@@ -36,7 +36,7 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/bubble_watson"
         android:elevation="2dp"
-        android:maxWidth="240dp"
+        android:maxWidth="250dp"
         android:paddingLeft="12dp"
         android:paddingTop="6dp"
         android:paddingRight="12dp"

@@ -113,9 +113,11 @@ public class WatsonActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
+        recyclerView.scrollToPosition(mAdapter.getItemCount());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+        recyclerView.canScrollVertically(0);
         this.inputMessage.setText("");
         this.initialRequest = true;
 
