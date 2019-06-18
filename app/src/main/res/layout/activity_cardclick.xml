@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#A1000000"
-    tools:context="com.example.sookchat.CardClickActivity">
+    tools:context="com.example.sookchat.CardClickActivity"
+    android:id="@+id/layout_cardclick">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_recycler"
@@ -14,7 +15,8 @@
         android:layout_gravity="center"
         tools:listitem="@layout/view_card" />
 
-
+    <include
+        layout="@layout/view_card" />
 
 
 </LinearLayout>

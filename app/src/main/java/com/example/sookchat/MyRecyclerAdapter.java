@@ -44,7 +44,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         TextView title;
         TextView content;
         ImageView image;
-
         CardView cv; //for touch listener
 
         public ViewHolder(View itemView) {
@@ -89,6 +88,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @Override
