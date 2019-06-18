@@ -19,7 +19,10 @@
         android:roundIcon="@mipmap/ic_launcher_sookchat_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".developActivity"></activity>
+        <activity android:name=".OnBoardTutorial">
+
+        </activity>
+        <activity android:name=".developActivity" />
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
@@ -27,23 +30,27 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_KEY" />
+            android:value="AIzaSyC5eQ5OieYavyI7rLO3AxCKgSgyzcLOR5w" />
 
         <activity
             android:name=".WatsonActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEARCH" />
 
+                <action android:name="android.intent.action.SEARCH" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".CardClickActivity" />
+        <activity android:name=".MapBuilding" />
     </application>
 
 </manifest>

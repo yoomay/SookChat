@@ -8,6 +8,6 @@
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_mail"
-        android:title="건의하기"
+        android:title="Gmail로 건의하기"
         app:showAsAction="never"/>
 </menu>
