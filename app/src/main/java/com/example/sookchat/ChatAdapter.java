@@ -1,7 +1,9 @@
 package com.example.sookchat;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import static com.example.sookchat.CardClickActivity.ccContext;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -105,8 +109,17 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
       Glide
               .with(cContext)
               .load(((WatsonActivity)WatsonActivity.mContext).imageSource)
-              .apply(com.bumptech.glide.request.RequestOptions.bitmapTransform(new com.bumptech.glide.load.resource.bitmap.RoundedCorners(100)))
+              .apply(com.bumptech.glide.request.RequestOptions.bitmapTransform(new com.bumptech.glide.load.resource.bitmap.RoundedCorners(50)))
               .into(((ViewHolder) holder).images);
+
+      ((ViewHolder) holder).images.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+
+          Intent intent = new Intent(cContext, ImageViewActivity.class);
+           cContext.startActivity(intent);
+        }
+      });
 
     }
     else {

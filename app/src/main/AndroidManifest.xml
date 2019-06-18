@@ -19,13 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_sookchat_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ImageViewActivity"></activity>
+        <activity android:name=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".WelcomeActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
         <activity android:name=".developActivity" />
         <activity
             android:name=".SplashActivity"
@@ -34,7 +35,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_KEY" />
+            android:value="AIzaSyDGgcknMk-knvc24vGCTspUB1l0ul2tULc" />
 
         <activity
             android:name=".WatsonActivity"

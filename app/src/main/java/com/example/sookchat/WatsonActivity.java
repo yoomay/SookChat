@@ -160,35 +160,6 @@ public class WatsonActivity extends AppCompatActivity {
 
 
     // Speech-to-Text Record Audio permission
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
-            case RECORD_REQUEST_CODE: {
-
-                if (grantResults.length == 0
-                        || grantResults[0] !=
-                        PackageManager.PERMISSION_GRANTED) {
-
-                    Log.i(TAG, "Permission has been denied by user");
-                } else {
-                    Log.i(TAG, "Permission has been granted by user");
-                }
-                return;
-            }
-
-            case MicrophoneHelper.REQUEST_PERMISSION: {
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission to record audio denied", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-
-
-    }
 
     protected void makeRequest() {
         ActivityCompat.requestPermissions(this,
@@ -375,7 +346,7 @@ public class WatsonActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        speechService.recognizeUsingWebSocket(getRecognizeOptions(capture), new MicrophoneRecognizeDelegate());
+
                     } catch (Exception e) {
 
                     }
@@ -421,49 +392,13 @@ public class WatsonActivity extends AppCompatActivity {
     }
 
     //Private Methods - Speech to Text
-    private RecognizeOptions getRecognizeOptions(InputStream audio) {
-        return new RecognizeOptions.Builder()
-                .audio(audio)
-                .contentType(ContentType.OPUS.toString())
-                .model("en-US_BroadbandModel")
-                .interimResults(true)
-                .inactivityTimeout(2000)
-                .build();
-    }
+
 
     //Watson Speech to Text Methods.
-    private class MicrophoneRecognizeDelegate extends BaseRecognizeCallback {
-        @Override
-        public void onTranscription(SpeechRecognitionResults speechResults) {
-            if (speechResults.getResults() != null && !speechResults.getResults().isEmpty()) {
-                String text = speechResults.getResults().get(0).getAlternatives().get(0).getTranscript();
-                showMicText(text);
-            }
-        }
 
 
 
-    private void showMicText(final String text) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                inputMessage.setText(text);
-            }
-        });
-    }
 
 
 
-    private void showError(final Exception e) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(WatsonActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        });
-    }
-
-
-}
 }

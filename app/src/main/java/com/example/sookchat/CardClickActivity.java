@@ -1,6 +1,7 @@
 package com.example.sookchat;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,15 +27,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CardClickActivity extends AppCompatActivity {
-
+        private ImageButton btnClose;
+        private Button btnLike;
+        private Button btnComment;
         private List<ImageItem> imageList = new ArrayList<ImageItem>();
         private ViewAdapter adapter;
+        public static Context ccContext;
         Data data;
 
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_cardclick);
-
+            ccContext=this;
             Intent intent = getIntent();
             int catid = intent.getIntExtra("catid", 0);
 
@@ -41,17 +48,35 @@ public class CardClickActivity extends AppCompatActivity {
 
 
 
-            adapter = new ViewAdapter(imageList);
+            adapter = new ViewAdapter(this,imageList);
             recyclerView.setAdapter(adapter);
 
             PagerSnapHelper snapHelper = new PagerSnapHelper();
             snapHelper.attachToRecyclerView(recyclerView);
-
-
             getDataList(catid);
+
+            btnClose= findViewById(R.id.btn_close);
+            btnLike=findViewById(R.id.btn_like);
+            btnComment=findViewById(R.id.btn_comment);
+
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(CardClickActivity.this, "Like!", Toast.LENGTH_SHORT).show();
+                    onBackPressed();
+                }
+            });
+            btnLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(CardClickActivity.this, "Like!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
 
         }
+
 
     @Override
     public void onBackPressed(){
