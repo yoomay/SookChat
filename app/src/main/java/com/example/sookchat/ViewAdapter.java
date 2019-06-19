@@ -60,7 +60,7 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
             viewimage = itemView.findViewById(R.id.view_image);
             btnClose = itemView.findViewById(R.id.btn_close);
             btnLike=itemView.findViewById(R.id.btn_like);
-            btnComment=itemView.findViewById(R.id.btn_comment);
+            btnComment=(Button)itemView.findViewById(R.id.btn_comment);
             this.onCardListener = onCardListener;
             itemView.setOnClickListener(this);
 

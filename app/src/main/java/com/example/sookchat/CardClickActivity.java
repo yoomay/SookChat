@@ -35,7 +35,9 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
     private static final String TAG = "CardClickActivity";
         private List<ImageItem> imageList = new ArrayList<ImageItem>();
         private ViewAdapter adapter;
+        private RecyclerView recyclerView;
         public static Context ccContext;
+        int catid;
         Data data;
 
         protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +45,9 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
             setContentView(R.layout.activity_cardclick);
             //ccContext=this;
             Intent intent = getIntent();
-            int catid = intent.getIntExtra("catid", 0);
+            catid = intent.getIntExtra("catid", 0);
 
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.view_recycler);
+            recyclerView = (RecyclerView) findViewById(R.id.view_recycler);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             recyclerView.setLayoutManager(layoutManager);
 
@@ -61,6 +63,16 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
 
 
 
+        }
+        public void onStart() {
+
+
+            super.onStart();
+        }
+
+        public void onResume() {
+
+            super.onResume();
         }
 
 
