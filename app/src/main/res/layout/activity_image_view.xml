@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Image View"
+                android:text="Image view"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_gravity="left"

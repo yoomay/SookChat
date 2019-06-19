@@ -15,8 +15,5 @@
         android:layout_gravity="center"
         tools:listitem="@layout/view_card" />
 
-    <include
-        layout="@layout/view_card" />
-
 
 </LinearLayout>

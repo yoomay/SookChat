@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.sookchat.CardClickActivity;
 import com.example.sookchat.Data;
 import com.example.sookchat.Data;
@@ -76,6 +77,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         holder.content.setText(data.getContent());
         Glide.with(mContext)
                 .load( IMAGE_DIR + data.getFilename() + ".jpg")
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .centerCrop()
                 .into(holder.image);
 
