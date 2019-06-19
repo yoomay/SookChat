@@ -69,30 +69,27 @@ public class MapCardAdapter extends RecyclerView.Adapter<MapCardAdapter.MyViewHo
         MyViewHolder holder = new MyViewHolder(view,mListener);
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-
-
-            @Override
-            public void onClick (View view){
-                Intent intent = new Intent(mContext, MapBuilding.class);
-
-                mContext.startActivity(new Intent(mContext, MapBuilding.class).putExtra("id", 1));
-                intent.putExtra("info", myImageNameList[1]);
-
-
-            }
-
-
-        });
-
         return holder;
     }
 
     //Under map, slide. This is for setting text in textview and image in imageview, row 갯수만큼 컴파이얼러가 이 함수 부름
     @Override
-    public void onBindViewHolder(MapCardAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MapCardAdapter.MyViewHolder holder, final int position) {
         holder.iv.setImageResource(imageModelArrayList.get(position).getImage_drawable());
         holder.time.setText(imageModelArrayList.get(position).getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick (View view){
+                Intent intent = new Intent(mContext, MapBuilding.class);
+                intent.putExtra("title", imageModelArrayList.get(position).getName());
+                mContext.startActivity(intent);
+            }
+
+
+        });
+
     }
 
     @Override
