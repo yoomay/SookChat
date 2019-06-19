@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,7 +130,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,GoogleMa
         //MapsInitializer.initialize(this.getActivity());
 
         // Updates the location and zoom of the MapView
-
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(37.544740, 126.964445),17 );
 
         googleMap.animateCamera(cameraUpdate);
@@ -256,26 +256,41 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,GoogleMa
     }
 
     //Marker Click Listner
+    //Marker Click Listener
     public boolean onMarkerClick(Marker marker) {
-        recyclerView =rootView.findViewById(R.id.recycler_view);
-        CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
+
+        recyclerView = rootView.findViewById(R.id.recycler_view);
+        //CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         //googleMap.animateCamera(center);
-        String building =(String)marker.getTag();
-        int temp=0;
-        for(int i=0;i<myImageNameList.length;i++){
-            if(myImageNameList[i].equals(building)){
-                temp=i;
+
+        String building;
+        building = (String) marker.getTag();
+        int temp = 0;
+        int i;
+        for (i = 0; i < myImageNameList.length; i++) {
+            if (myImageNameList[i].equals(building)) {
+                temp = i;
                 break;
             }
         }
-        //parameter offset is used for setting clicked card location (ex. middle of a screen)
-        ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(temp,250);
+        //smoothly scroll
+        RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(getContext()) {
+            @Override
+            public int calculateDtToFit(int viewStart, int viewEnd, int boxStart, int boxEnd, int snapPreference) {
+                return (boxStart + (boxEnd - boxStart) / 2) - (viewStart + (viewEnd - viewStart) / 2);
+            }
+       /* @Override protected int getVerticalSnapPreference() {
+           return LinearSmoothScroller.SNAP_TO_START;
+       }*/
+        };
+        smoothScroller.setTargetPosition(temp);
+        ((LinearLayoutManager) recyclerView.getLayoutManager()).startSmoothScroll(smoothScroller);
+
         return true;
     }
 
 
 
-
-}
+    }
 
 

@@ -126,6 +126,15 @@ public class ChatbotFragment extends Fragment {
             case R.id.action_develop:
                     Intent developIntent = new Intent(getActivity(),developActivity.class);
                     startActivity(developIntent);
+            case R.id.action_mail:
+                Intent Email = new Intent(Intent.ACTION_SEND);
+                Email.setType("text/email");
+                Email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"jiho960214@sookmyung.ac.kr "});  //developer 's email
+                Email.putExtra(Intent.EXTRA_SUBJECT,
+                        "묻고자 하는 주제가 무엇인가요?"); // Email 's Subject
+                Email.putExtra(Intent.EXTRA_TEXT, "To developers," + "");  //Email 's Greeting text
+                startActivity(Intent.createChooser(Email, "Send Feedback:"));
             default:
                 break;
         }
