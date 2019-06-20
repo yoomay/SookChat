@@ -1,8 +1,10 @@
 package com.example.sookchat;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,12 +40,12 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
         private RecyclerView recyclerView;
         public static Context ccContext;
         int catid;
-        Data data;
+
 
         protected void onCreate(Bundle savedInstanceState) {
+            Log.e(TAG,"onCreate: called.");
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_cardclick);
-            //ccContext=this;
             Intent intent = getIntent();
             catid = intent.getIntExtra("catid", 0);
 
@@ -53,8 +55,8 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
 
 
 
-            adapter = new ViewAdapter(ccContext,imageList,this );
-
+            adapter = new ViewAdapter(ccContext,imageList);
+            adapter.setOnClickListener(this);
             recyclerView.setAdapter(adapter);
 
             PagerSnapHelper snapHelper = new PagerSnapHelper();
@@ -62,22 +64,24 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
             getDataList(catid);
 
 
-
         }
+
+
         public void onStart() {
-
-
+            Log.e(TAG,"onStart: called.");
             super.onStart();
         }
 
         public void onResume() {
-
+            Log.e(TAG,"onResume: called.");
             super.onResume();
         }
 
 
 
+
     public void getDataList(int catid) {
+        Log.e(TAG,"getDataList: called.");
         RetroFitApiInterface apiInterface = RetroFitApiClient.getClient().create(RetroFitApiInterface.class);
         Call<List<ImageItem>> call = apiInterface.getImage(catid);
         call.enqueue(new Callback<List<ImageItem>>() {
@@ -89,7 +93,7 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
                     for (ImageItem imageitem : response.body()) {
                         imageList.add(imageitem);
                     }
-                    Log.i("RESPONSE: ", "" + response.toString());
+                    Log.e(TAG,"getDataList_onResponse: " + response.body());
 
                 }
                 adapter.notifyDataSetChanged();
@@ -106,11 +110,9 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
 
     @Override
     public void onCardClick(int position) {
+        Log.e(TAG,"onCardClick: called.");
         Intent intent = new Intent(this, CommentActivity.class);
         intent.putExtra("imageid", imageList.get(position).getImageid());
         startActivity(intent);
-        Log.d(TAG,"onCardClick: clicked");
-
-
     }
 }
