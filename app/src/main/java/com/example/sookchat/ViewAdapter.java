@@ -80,6 +80,8 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
     public interface OnCardListener{
         void onCardClick(int position);
+
+        void onCardDelete();
     }
 
 
@@ -106,9 +108,10 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder> {
 
         holder.btnClose.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View view){
 
-                ((Activity)ccContext).finish();
+                //((Activity)ccContext).finish();
+                mOnCardListener.onCardDelete();
             }
         });
 

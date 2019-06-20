@@ -115,4 +115,8 @@ public class CardClickActivity extends AppCompatActivity implements ViewAdapter.
         intent.putExtra("imageid", imageList.get(position).getImageid());
         startActivity(intent);
     }
+
+    public void onCardDelete(){
+            finish();
+    }
 }
